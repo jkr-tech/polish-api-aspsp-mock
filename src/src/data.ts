@@ -1,10 +1,9 @@
-import * as debug from 'debug'
 import {Router} from 'express'
 import * as accountsService from './service/accounts'
 import * as paymentService from './service/payment'
 import * as transactionsService from './service/transactions'
 import * as userService from './service/user'
-const trace = debug('aspsp-mock:data')
+
 const router = Router()
 export default router
 
@@ -27,7 +26,7 @@ router.get('/users/:userId', (req, res) => {
 })
 
 router.get('/user/', (req, res) => {
-    const user = userService.get(req.user.username)
+    const user = userService.get((req.user as any).username)
     if (user) {
         res.send(user)
     } else {
@@ -45,7 +44,7 @@ router.get('/users/:userId/accounts', (req, res) => {
 })
 
 router.get('/user/accounts', (req, res) => {
-    const accounts = accountsService.list(req.user.username)
+    const accounts = accountsService.list((req.user as any).username)
     if (accounts) {
         res.send(accounts)
     } else {
@@ -63,7 +62,7 @@ router.get('/users/:userId/accounts/:accountNumber', (req, res) => {
 })
 
 router.get('/user/accounts/:accountNumber', (req, res) => {
-    const account = accountsService.get(req.user.username, req.params.accountNumber)
+    const account = accountsService.get((req.user as any).username, req.params.accountNumber)
     if (account) {
         res.send(account)
     } else {
@@ -81,7 +80,7 @@ router.get('/users/:userId/accounts/:accountNumber/transactions', (req, res) => 
 })
 
 router.get('/user/accounts/:accountNumber/transactions', (req, res) => {
-    const transactions = transactionsService.list(req.user.username, req.params.accountNumber)
+    const transactions = transactionsService.list((req.user as any).username, req.params.accountNumber)
     if (transactions) {
         res.send(transactions)
     } else {
@@ -99,7 +98,7 @@ router.get('/users/:userId/accounts/:accountNumber/transactions/:itemId', (req, 
 })
 
 router.get('/user/accounts/:accountNumber/transactions/:itemId', (req, res) => {
-    const transaction = transactionsService.get(req.user.username, req.params.accountNumber, req.params.itemId)
+    const transaction = transactionsService.get((req.user as any).username, req.params.accountNumber, req.params.itemId)
     if (transaction) {
         res.send(transaction)
     } else {
@@ -117,7 +116,7 @@ router.get('/users/:userId/payments', (req, res) => {
 })
 
 router.get('/user/payments', (req, res) => {
-    const accounts = paymentService.listPaymentContainers(req.user.username)
+    const accounts = paymentService.listPaymentContainers((req.user as any).username)
     if (accounts) {
         res.send(accounts)
     } else {
@@ -135,7 +134,7 @@ router.get('/users/:userId/payments/:paymentId', (req, res) => {
 })
 
 router.get('/user/payments/:paymentId', (req, res) => {
-    const account = paymentService.getPaymentContainer(req.user.username, req.params.paymentId)
+    const account = paymentService.getPaymentContainer((req.user as any).username, req.params.paymentId)
     if (account) {
         res.send(account)
     } else {
@@ -153,7 +152,7 @@ router.get('/users/:userId/bundles', (req, res) => {
 })
 
 router.get('/user/bundles', (req, res) => {
-    const accounts = paymentService.listBundleContainers(req.user.username)
+    const accounts = paymentService.listBundleContainers((req.user as any).username)
     if (accounts) {
         res.send(accounts)
     } else {
@@ -171,7 +170,7 @@ router.get('/users/:userId/bundles/:bundleId', (req, res) => {
 })
 
 router.get('/user/bundles/:bundleId', (req, res) => {
-    const account = paymentService.getBundleContainer(req.user.username, req.params.bundleId)
+    const account = paymentService.getBundleContainer((req.user as any).username, req.params.bundleId)
     if (account) {
         res.send(account)
     } else {
