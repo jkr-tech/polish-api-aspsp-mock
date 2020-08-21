@@ -1,7 +1,7 @@
 
 import debug = require('debug')
 import * as _ from 'lodash'
-import * as uuid4 from 'uuid/v4'
+import { v4 as uuid4 } from 'uuid'
 import { AddBundle, AddPayment, BundleStatus,
     ExecutionMode, GeneralStatus, GetBundle,
     GetPayment, PaymentBundle, PaymentBundleContainer, PaymentContainer,

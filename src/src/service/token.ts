@@ -1,4 +1,4 @@
-import * as uuid4 from 'uuid/v4'
+import { v4 as uuid4 } from 'uuid'
 
 export interface TokenData {
     sub: string
